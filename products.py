@@ -20,12 +20,20 @@ with open('products.csv', 'w', encoding = 'utf-8') as f: # 写入时，选择编
 		f.write(p[0] + ',' + p[1] + '\n')  #字串和数字不能做+，*运算，如果是数字，需要写成 str(p[1])
 # 读取时选择编码，excel -> Data -> Get External Data -> From Text -> "选编码", next -> "选Delimiters" -> ...
 
-#读取文档
-new_products = []
-with open('products.csv', 'r', encoding = 'utf-8') as f:
-	for line in f:
-		if '商品,价格' in line:
-			continue  # 继续---跳到下一循环
-		name, price = line.strip().split(',')
-		new_products.append([name, price])
-print(new_products)
+import os # operating system
+
+if os.path.isfile('products.csv'):
+	print('找到档案了！')
+	#读取文档
+	new_products = []
+	with open('products.csv', 'r', encoding = 'utf-8') as f:
+		for line in f:
+			if '商品,价格' in line:
+				continue  # 继续---跳到下一循环
+			name, price = line.strip().split(',')
+			new_products.append([name, price])
+	print(new_products)
+else:
+	print('找不到档案……')
+
+
